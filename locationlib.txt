@@ -1,0 +1,52 @@
+local Sense = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua'))()
+
+local function updateESP()
+    local musicFolder = game:GetService("ReplicatedStorage"):FindFirstChild("Music")
+
+    if musicFolder then
+        Sense.teamSettings.enemy.enabled = musicFolder:FindFirstChild("Effects") and true or false
+
+        Sense.teamSettings.enemy.box = musicFolder:FindFirstChild("HitAir") and true or false
+
+        Sense.teamSettings.enemy.tracer = musicFolder:FindFirstChild("BreathInOut") and true or false
+
+        Sense.teamSettings.enemy.chams = musicFolder:FindFirstChild("DeathSpawn") and true or false
+
+        Sense.teamSettings.enemy.name = musicFolder:FindFirstChild("Balls") and true or false
+
+        Sense.teamSettings.enemy.healthBar = musicFolder:FindFirstChild("Damage1") and true or false
+    end
+end
+
+updateESP()
+
+local musicFolder = game:GetService("ReplicatedStorage"):WaitForChild("Music")
+
+musicFolder.ChildAdded:Connect(function(child)
+    updateESP()
+end)
+
+musicFolder.ChildRemoved:Connect(function(child)
+    updateESP()
+end)
+
+Sense.teamSettings.enemy.boxOutline = false
+Sense.teamSettings.enemy.tracerOutline = false
+Sense.teamSettings.enemy.tracerColor = { Color3.new(202/255, 207/255, 219/255), 1 }
+Sense.teamSettings.enemy.tracerOrigin = "Bottom"
+Sense.teamSettings.enemy.healthBarweapon = true
+Sense.teamSettings.enemy.healthBarOutline = false
+Sense.teamSettings.enemy.offScreenArrow = false
+Sense.teamSettings.enemy.offScreenArrowSize = 8
+Sense.teamSettings.enemy.offScreenArrowRadius = 300
+Sense.teamSettings.enemy.distance = false
+Sense.teamSettings.enemy.chamsFillColor = { Color3.new(0.2, 0.2, 0.2), 1 }
+Sense.teamSettings.enemy.chamsOutlineColor = { Color3.new(13/255, 13/255, 13/255), 0 }
+Sense.teamSettings.enemy.healthText = false
+Sense.teamSettings.enemy.nameColor = { Color3.new(117/255, 255/255, 143/255), 1 }
+Sense.teamSettings.enemy.healthTextOutline = false
+Sense.teamSettings.enemy.distanceOutline = false
+Sense.teamSettings.enemy.offScreenArrowOutline = false
+Sense.teamSettings.enemy.boxColor = { Color3.new(9/255, 11/255, 43/255), 1 }
+
+Sense.Load()
